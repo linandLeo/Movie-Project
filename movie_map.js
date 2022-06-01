@@ -8,10 +8,10 @@
     // whole item we are only capturing the field we are going to use here.
 export const mapUserToRecord = ({title, director, rating, genre, id}) => {
         return `<tr data-id="${id}" >
-                       <td data-id="${id}" class="user-record"> ${rating}
-                       </td>
-                       <td data-id="${id}" class="user-record">${director}. ${title} ${genre}</td>
-              
+                       <td data-id="${id}" class="user-record"> ${rating}</td>
+                       <td data-id="${id}" class="user-record">${director}</td>
+                       <td data-id="${id}" class="user-record">${title}</td>
+                       <td data-id="${id}" class="user-record">${genre}</td>
                        <td>
                             <button class="delete" value="${id}">X</button>
                             <button class="edit" value="${id}">Edit</button>

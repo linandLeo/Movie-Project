@@ -1,4 +1,6 @@
 import {mapUserToRecord} from "./movie_map.js";
+import {handleDeleteView,
+} from "./movie_handlers.js";
 
 fetch("https://dazzling-antique-may.glitch.me/movies")
     .then((res)=> {
@@ -16,7 +18,8 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
     // .then(res => res.json())
     // .then(res => {
     //         console.log("res:", res)
-
+    //     document.getElementById("data").innerHTML +=
+    //         res.map(mapUserToRecord).join("");
 
 
 
