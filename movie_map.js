@@ -19,6 +19,7 @@ export const mapUserToRecord = ({title, director, rating, genre, id}) => {
                    </tr>`
     };
 
+
 export const mapUserToUpdate = (data) => {
     return createForm("update", data)
 }
@@ -32,33 +33,32 @@ export const createForm = (name, data) => {
         data = {
             id: 0,
             title: "",
-            firstName: "",
-            lastName: "",
-            gender: "",
-            email: "",
-            dateOfBirth: "",
-            phone: "",
-            picture: ""
+            director: "",
+            genre: ""
+            // gender: "",
+            // email: "",
+            // dateOfBirth: "",
+            // phone: "",
+            // picture: ""
         }
     }
 
-    let {id, title, firstName, lastName, gender,
-        email, dateOfBirth, phone, picture} = data;
+    let {id, title, director, genre} = data;
 
     // handle Z in data for timezone, might need to add back for update
-    if(data) dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
+    // if(data) dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
 
     return `
-        <form name="${name}">
+        <form name="${movies}">
         <input type="hidden" name="id" value="${id}">
         <label for="field1">Title</label><input type="text" name="title" value="${title.toUpperCase()}" id="field1">
-        <label for="field2">First Name</label><input type="text" name="firstName" value="${firstName}" id="field2">
-        <label for="field3">Last Name</label><input type="text" name="lastName" value="${lastName}" id="field3">
-        <label for="field4">Gender</label><input type="text" name="gender" value="${gender}" id="field4">
-        <label for="field5">Email</label><input type="text" name="email" value="${email}" id="field5">
-        <label for="field6">Date of Birth</label><input type="datetime-local" value="${dateOfBirth}" name="dateOfBirth" id="field6">
-        <label for="field7">Phone</label><input type="text" name="phone" value="${phone}" id="field7">
-        <label for="field8">Picture</label><input type="text" name="picture" value="${picture}" id="field8">
+        <label for="field2">Director</label><input type="text" name="director" value="${director}" id="field2">
+        <label for="field3">Genre</label><input type="text" name="genre" value="${genre}" id="field3">
+        <label for="field4">ID</label><input type="text" name="id" value="${id}" id="field4">
+<!--        <label for="field5">Email</label><input type="text" name="email" value="${email}" id="field5">-->
+<!--        <label for="field6">Date of Birth</label><input type="datetime-local" value="${dateOfBirth}" name="dateOfBirth" id="field6">-->
+<!--        <label for="field7">Phone</label><input type="text" name="phone" value="${phone}" id="field7">-->
+<!--        <label for="field8">Picture</label><input type="text" name="picture" value="${picture}" id="field8">-->
     </form>
     `
 }
@@ -66,12 +66,12 @@ export const createForm = (name, data) => {
 
 
 export const mapUserToView =
-    ({id, title, firstName, lastName, gender, email, dateOfBirth, phone, picture, location}) => {
+    ({id, title, director, genre}) => {
 
         // handle Z in data for timezone, might need to add back for update
-        dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
+        // dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
 
-        console.log("location:", location)
+        console.log("title", title)
         return `
        <div class="profile">
                 <section class="header">

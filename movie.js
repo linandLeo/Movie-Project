@@ -1,16 +1,24 @@
-import { mapUserToRecord } from "./maps.js";
+import {mapUserToRecord} from "./movie_map.js";
+
 fetch("https://dazzling-antique-may.glitch.me/movies")
     .then((res)=> {
         return res.json();
     })
     .then((res)=>{
         console.log(res);
+        document.getElementById("data").innerHTML +=
+            res.map(mapUserToRecord).join("");
     })
 
     .catch((e)=> {
         console.log("ERROR!!!!!!", e);
-        document.getElementById("data").innerHTML +=
-            res.data.map(mapUserToRecord).join("");
+
+    // .then(res => res.json())
+    // .then(res => {
+    //         console.log("res:", res)
+
+
+
 
         //event handlers!
         $(".delete").click(handleDeleteView);
