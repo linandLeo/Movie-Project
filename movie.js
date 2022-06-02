@@ -1,44 +1,3 @@
-// const renderMovies
-
-
-fetch("https://dazzling-antique-may.glitch.me/movies")
-    .then((res)=> {
-        return res.json();
-    //    should be the whole thing in function
-    })
-    .then((res)=>{
-        console.log(res);
-        document.getElementById("data").innerHTML +=
-            res.map(mapUserToRecord).join("");
-        $(".delete").on("click",handleDeleteView);
-
-    })
-
-    .catch((e)=> {
-        console.log("ERROR!!!!!!", e);
-    });
-        //equal whole function and recall after complete to call again with new data
-
-
-
-        //event handlers!
-
-        $(".edit").on("click",handleDisplayUpdate);
-        // $(".user-record").click(handleDisplayProfile);
-        // $("#create").click(handleCreateUserView);
-
-// function ajaxLoadstart(text)
-// {
-//     if(jQuery('body').find('#').attr('id') != 'resultLoading'){
-//         jQuery('body').append('<div data-img ="3d Text-1s-280px.gif" id="myItem1"><div></div></div><div class="bg"></div></div>');
-//     }
-
-
-
-
-//handlers_js
-
-
 const modal = {
     all: document.querySelector("#modal"),
     main: document.querySelector("#modal > main"),
@@ -47,23 +6,43 @@ const modal = {
     container: document.querySelector("#modal-container") // represents the background
 }
 
+// const renderMovies=
 
+
+fetch("https://dazzling-antique-may.glitch.me/movies")
+    .then((res) => {
+        return res.json();
+        //    should be the whole thing in function
+    })
+    .then((res) => {
+        console.log(res);
+        document.getElementById("data").innerHTML +=
+            res.map(mapUserToRecord).join("");
+        $(".delete").on("click", handleDeleteView);
+        $(".edit").on("click", handleDisplayUpdate);
+    })
+
+    .catch((e) => {
+        console.log("ERROR!!!!!!", e);
+    });
+//equal whole function and recall after complete to call again with new data
+
+
+// $("#create").click(handleCreateUserView);
 const handleDeleteView = (event) => {
     console.log("handle Delete")
     toggleModal();
-
     modal.head.innerHTML = `<h3>Do you wish to delete this User?</h3>`
     modal.main.innerHTML = "<p>If you delete this User its gone forever.</p>"
     modal.foot.innerHTML = mapUserToDelete(event.target.value);
 
-    $("button.confirm").on("click",handleDoDelete);
+    $("button.confirm").on("click", handleDoDelete);
 
 };
 
 const handleDoDelete = (event) => {
     event.preventDefault();
-//
-    fetch ("https://dazzling-antique-may.glitch.me/movies/" + event.target.value,{method:'delete'})
+    fetch("https://dazzling-antique-may.glitch.me/movies/" + event.target.value, {method: 'delete'})
         .then(res => res.json())
         .then(res => {
             console.log("res :", res);
@@ -71,7 +50,7 @@ const handleDoDelete = (event) => {
         })
 }
 
-//Modal
+//Modal after click delete button turns on
 const toggleModal = () => {
     // show hide modal logic
     modal.container.classList.toggle("hide")
@@ -88,15 +67,76 @@ const disableModal = () => {
     modal.all.classList.add("hide");
 }
 
+const mapUserToDelete = (id) => {
+    return `<form>
+          <button class="confirm delete" value="${id}">Confirm</button>
+          <button class="cancel">Cancel</button>
+    </form>`
+}
+
+const handleDisplayUpdate = (event) => {
+    enableModal();
+    //console.log("event :", event);
+
+    //TODO: Get Data from user by Id
+    //TODO: Map to update form
+    //TODO: Add handlers
+
+    fetch("https://dazzling-antique-may.glitch.me/movies/" + event.target.value, {method: 'PUT'})
+        .then(res => res.json())
+        .then(res => {
+
+            modal.main.innerHTML = mapUserToUpdate(res);
+            modal.foot.innerHTML = mapButtonsForUpdate(res.id);
 
 
+            $("button.confirm.update").on("click", handleDoUpdate);
 
 
+        })
 
-// maps_js
+};
+
+// Example: PUT fetch request
+const handleDoUpdate = (event) => {
+    event.preventDefault();
+
+    const movies = document.forms.update;
+
+    let data = {
+        id: movies.id.value,
+        title: movies.title.value,
+        director: movies.director.value,
+        genre: movies.genre.value
+    }
+
+    let settings = {
+        method: "PUT",
+        body: JSON.stringify(data)
+    }
+
+    fetch("https://dazzling-antique-may.glitch.me/movies/" + event.target.value, settings)
+        .then(res => res.json())
+        .then(res => {
+            console.log("res:", res);
+            // TODO: use this value to update the field record in the table
+            disableModal();
+        })
+}
+// .then((res) => {
+//     console.log(res);
+//     document.getElementById("data").innerHTML +=
+//         res.map(mapUserToRecord).join("");
+const mapButtonsForUpdate = (id, type = 'update') => {
+    return ` <form>
+          <button class="confirm ${type}" value="${id}">Confirm</button>
+          <button class="cancel">Cancel</button>
+            </form>`
+}
 
 
-
+//
+//
 const mapUserToRecord = ({title, director, rating, genre, id}) => {
     return `<tr data-id="${id}" >
                        <td data-id="${id}" class="user-record"> ${rating}</td>
@@ -120,7 +160,7 @@ const mapUserCreateForm = () => {
 }
 
 const createForm = (name, data) => {
-    if(!data) {
+    if (!data) {
         data = {
             id: 0,
             title: "",
@@ -140,20 +180,15 @@ const createForm = (name, data) => {
     // if(data) dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
 
     return `
-        <form name="${movies}">
+    <form name="${name}">
         <input type="hidden" name="id" value="${id}">
-        <label for="field1">Title</label><input type="text" name="title" value="${title.toUpperCase()}" id="field1">
+        <label for="field1">Title</label><input type="text" name="title" value="${title}" id="field1">
         <label for="field2">Director</label><input type="text" name="director" value="${director}" id="field2">
         <label for="field3">Genre</label><input type="text" name="genre" value="${genre}" id="field3">
         <label for="field4">ID</label><input type="text" name="id" value="${id}" id="field4">
-<!--        <label for="field5">Email</label><input type="text" name="email" value="${email}" id="field5">-->
-<!--        <label for="field6">Date of Birth</label><input type="datetime-local" value="${dateOfBirth}" name="dateOfBirth" id="field6">-->
-<!--        <label for="field7">Phone</label><input type="text" name="phone" value="${phone}" id="field7">-->
-<!--        <label for="field8">Picture</label><input type="text" name="picture" value="${picture}" id="field8">-->
     </form>
     `
 }
-
 
 
 const mapUserToView =
@@ -184,22 +219,23 @@ const mapUserToView =
                     <div>Title:  <span>${title}</span></div>
                 </section>
        </div>
-    `
+`
     }
 
-const mapButtonsForUpdate = (id,  type='update') => {
-    return ` <form>
-          <button class="confirm ${type}" value="${id}">Confirm</button>
-          <button class="cancel">Cancel</button>
-            </form>`
-}
+//
+//
 
-const mapUserToDelete = (id) => {
-    return `<form>
-          <button class="confirm delete" value="${id}">Confirm</button>
-          <button class="cancel">Cancel</button>
-    </form>
-  
-    `
-}
+
+// function ajaxLoadstart(text)
+
+
+// {
+//     if(jQuery('body').find('#').attr('id') != 'resultLoading'){
+//         jQuery('body').append('<div data-img ="3d Text-1s-280px.gif" id="myItem1"><div></div></div><div class="bg"></div></div>');
+//     }
+
+
+// }
+// ;
+
 
