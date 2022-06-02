@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Project</title>
-    <link href="./movie.css" type="text/css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./dist/loading-bar.css"/>
     <script type="text/javascript" src="dist/loading-bar.js"></script>
-    <script src="movie.js" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="./movie.css" type="text/css" rel="stylesheet" />
+
 
 </head>
 <body style="text-align: center;">
-<div >
+<!--<div >-->
 <!--    <div data-img ="3d Text-1s-280px.gif" id="myItem1"></div>-->
 
 <!--    $(document).ajaxStart(function(){-->
@@ -45,29 +45,23 @@
 
 <!--    <input type='text' id='search'>-->
 <!--    <input type='button' id='but_search' value='Search'><br/>-->
-    <div data-img ="3d Text-1s-280px.gif" id="myItem1"></div>
-    <script>
-        /* construct manually */
-        var bar1 = new ldBar("#myItem1");
-        /* ldBar stored in the element */
-        var bar2 = document.getElementById('myItem1').ldBar;
-        bar1.set(100);
-    </script>
-</div>
-<!--$.ajax({-->
-<!--...-->
-<!--complete: function(){-->
-<!--// Statement-->
-<!--}-->
-<!--...-->
-<!--});-->
-
-
-<!-- Image loader -->
-<!--<div id='loader' style='display: none;'>-->
-<!--    <img src='reload.gif' width='32px' height='32px'>-->
+<!--    <div data-img ="large.gif" id="myItem1"></div>-->
+<!--    <script>-->
+<!--        /* construct manually */-->
+<!--        var bar1 = new ldBar("#myItem1");-->
+<!--        /* ldBar stored in the element */-->
+<!--        var bar2 = document.getElementById('myItem1').ldBar;-->
+<!--        bar1.set(100);-->
+<!--    </script>-->
 <!--</div>-->
+
+
+
 <!--&lt;!&ndash; Image loader &ndash;&gt;-->
+<!--&lt;!&ndash;<div id='loader' style='display: none;'>&ndash;&gt;-->
+<!--&lt;!&ndash;    <img src='reload.gif' width='32px' height='32px'>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash; Image loader &ndash;&gt;&ndash;&gt;-->
 
 <!--<div class='response'></div>-->
 
@@ -92,10 +86,28 @@
     </table>
 
 </main>
+<footer>
 
-<!--<button type="button">Get Customers Details</button>-->
-<!--<p>Click the above button to get the customers details from the web server via Ajax.</p>-->
-<!--<div class="overlay"></div>-->
+</footer>
 
+<div id="modal-container" class="hide">
+    <div id="modal" class="modal hide">
+        <!-- going to place all modal stuff here-->
+        <header>
+            <h3>Modal!</h3>
+        </header>
+
+        <main>
+
+        </main>
+
+        <footer> <button>Accept!</button> </footer>
+
+    </div>
+
+</div>
+<!--<script src="movie_map.js"></script>-->
+<!--<script src="movie_handlers.js"></script>-->
+<script src="movie.js"></script>
         </body>
         </html>
