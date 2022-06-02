@@ -30,3 +30,8 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
         $("#create").click(handleCreateUserView);
     });
 
+// function ajaxLoadstart(text)
+// {
+//     if(jQuery('body').find('#').attr('id') != 'resultLoading'){
+//         jQuery('body').append('<div data-img ="3d Text-1s-280px.gif" id="myItem1"><div></div></div><div class="bg"></div></div>');
+//     }
