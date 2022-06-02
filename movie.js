@@ -42,27 +42,36 @@ const modal = {
 
 
 const handleDeleteView = (event) => {
-    console.log("handle Delete")
+
+    fetch("https://dazzling-antique-may.glitch.me/movies" + event.target.value, [])
+        .then(res => res.json())
+        .then(res => {
+            console.log("res :", res);
+            disableModal();
+        })
+// }
+
+console.log("handle Delete")
     toggleModal();
 
     modal.head.innerHTML = `<h3>Do you wish to delete this User?</h3>`
     modal.main.innerHTML = "<p>If you delete this User its gone forever.</p>"
     modal.foot.innerHTML = mapUserToDelete(event.target.value);
 
-    $("button.confirm").click(handleDoDelete);
+    // $("button.confirm").on("click",handleDoDelete);
 
 };
 
-const handleDoDelete = (event) => {
-    event.preventDefault();
-
-    fetch("https://dazzling-antique-may.glitch.me/movies" + event.target.value)
-        .then(res => res.json())
-        .then(res => {
-            console.log("res :", res);
-            disableModal();
-        })
-}
+// const handleDoDelete = (event) => {
+//     event.preventDefault();
+//
+//     fetch("https://dazzling-antique-may.glitch.me/movies" + event.target.value,[])
+//         .then(res => res.json())
+//         .then(res => {
+//             console.log("res :", res);
+//             disableModal();
+//         })
+// }
 
 //Modal
 const toggleModal = () => {
