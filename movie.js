@@ -1,6 +1,10 @@
+// const renderMovies
+
+
 fetch("https://dazzling-antique-may.glitch.me/movies")
     .then((res)=> {
         return res.json();
+    //    should be the whole thing in function
     })
     .then((res)=>{
         console.log(res);
@@ -13,10 +17,13 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
     .catch((e)=> {
         console.log("ERROR!!!!!!", e);
     });
+        //equal whole function and recall after complete to call again with new data
+
+
 
         //event handlers!
 
-        // $(".edit").on("click",handleDisplayUpdate);
+        $(".edit").on("click",handleDisplayUpdate);
         // $(".user-record").click(handleDisplayProfile);
         // $("#create").click(handleCreateUserView);
 
@@ -42,36 +49,27 @@ const modal = {
 
 
 const handleDeleteView = (event) => {
-
-    fetch("https://dazzling-antique-may.glitch.me/movies" + event.target.value, [])
-        .then(res => res.json())
-        .then(res => {
-            console.log("res :", res);
-            disableModal();
-        })
-// }
-
-console.log("handle Delete")
+    console.log("handle Delete")
     toggleModal();
 
     modal.head.innerHTML = `<h3>Do you wish to delete this User?</h3>`
     modal.main.innerHTML = "<p>If you delete this User its gone forever.</p>"
     modal.foot.innerHTML = mapUserToDelete(event.target.value);
 
-    // $("button.confirm").on("click",handleDoDelete);
+    $("button.confirm").on("click",handleDoDelete);
 
 };
 
-// const handleDoDelete = (event) => {
-//     event.preventDefault();
+const handleDoDelete = (event) => {
+    event.preventDefault();
 //
-//     fetch("https://dazzling-antique-may.glitch.me/movies" + event.target.value,[])
-//         .then(res => res.json())
-//         .then(res => {
-//             console.log("res :", res);
-//             disableModal();
-//         })
-// }
+    fetch ("https://dazzling-antique-may.glitch.me/movies/" + event.target.value,{method:'delete'})
+        .then(res => res.json())
+        .then(res => {
+            console.log("res :", res);
+            disableModal();
+        })
+}
 
 //Modal
 const toggleModal = () => {
