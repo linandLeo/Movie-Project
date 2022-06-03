@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+
 }
 
 html,body {
@@ -7,22 +8,27 @@ html,body {
 }
 
 h1 {
-    background-color: #063DAA;
+    background-image: url('blue-ticket.png');
+    background-size: 200px;
+    background-color: black;
     color: #FFAA00;
-    margin: 20px 350px;
-    padding: 10px 1px;
-    border-radius: 25px;
+    margin: 20px 5px;
+    padding: 32px 1px;
+    /*border-radius: 25px;*/
+    font-family: 'Notable', sans-serif;
 }
 
 body, html {
     background-color: #d0d0d0;
-    font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
-    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+    /*font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,*/
+    /*Ubuntu, Cantarell, "Helvetica Neue", sans-serif;*/
 }
 
 main {
     display: flex;
     flex-direction: column;
+
 }
 #userTable {
     border-collapse: collapse;
@@ -31,12 +37,14 @@ main {
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
 }
 
 #userTable thead tr {
     background-color: #063DAA;
     color: #FFAA00;
     text-align: center;
+    font-family: 'Notable', sans-serif;
 }
 
 #userTable td {
@@ -50,10 +58,12 @@ main {
 
 #userTable tbody tr {
     border-bottom: 1px solid #dddddd;
+
 }
 
 #userTable tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
+
 }
 
 #userTable tbody tr:last-of-type {
