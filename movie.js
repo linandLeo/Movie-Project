@@ -15,10 +15,10 @@ const customHeaders = new Headers({
 })
 
 
-// const renderMovies=
+// const renderMovies =
 
 
-fetch("https://dazzling-antique-may.glitch.me/movies")
+    fetch("https://dazzling-antique-may.glitch.me/movies")
     .then((res) => {
         return res.json();
         //    should be the whole thing in function
@@ -27,6 +27,7 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
         console.log(res);
         document.getElementById("data").innerHTML +=
             res.map(mapUserToRecord).join("");
+
         $(".delete").on("click", handleDeleteView);
         $(".edit").on("click", handleDisplayUpdate);
         $("#create").on("click", handleCreateUserView);
@@ -35,6 +36,7 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
     .catch((e) => {
         console.log("ERROR!!!!!!", e);
     });
+
 
 const mapUserToRecord = ({title, director, rating, genre, id}) => {
     return `<tr data-id="${id}" >
@@ -59,8 +61,9 @@ const handleDeleteView = (event) => {
     modal.foot.innerHTML = mapUserToDelete(event.target.value);
 
     $("button.confirm").on("click", handleDoDelete);
-
+    // renderMovies
 };
+
 
 const handleDoDelete = (event) => {
     event.preventDefault();
@@ -113,7 +116,7 @@ const handleDisplayUpdate = (event) => {
 
 
             $("button.confirm.update").on("click", handleDoUpdate);
-
+            // renderMovies
 
         })
 
@@ -131,6 +134,7 @@ const handleDoUpdate = (event) => {
         title: form.title.value,
         director: form.director.value,
         genre: form.genre.value,
+        // rating: form.rating.value,
 
     }
 
