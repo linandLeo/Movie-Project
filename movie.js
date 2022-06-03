@@ -1,3 +1,8 @@
+$(window).on("load", function(){
+    $(".loader-wrapper").fadeOut("slow");
+});
+
+
 const modal = {
     all: document.querySelector("#modal"),
     main: document.querySelector("#modal > main"),
