@@ -98,6 +98,7 @@ const handleDisplayUpdate = (event) => {
 };
 
 // Example: PUT fetch request
+// $("button.confirm.update").on("click", handleDoUpdate);
 const handleDoUpdate = (event) => {
     event.preventDefault();
 
@@ -119,6 +120,7 @@ const handleDoUpdate = (event) => {
         .then(res => res.json())
         .then(res => {
             console.log("res:", res);
+
             // TODO: use this value to update the field record in the table
             disableModal();
         })
