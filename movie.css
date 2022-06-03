@@ -6,6 +6,14 @@ html,body {
     height: 100%;
 }
 
+h1 {
+    background-color: #063DAA;
+    color: #FFAA00;
+    margin: 20px 350px;
+    padding: 10px 1px;
+    border-radius: 25px;
+}
+
 body, html {
     background-color: #d0d0d0;
     font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
@@ -26,8 +34,8 @@ main {
 }
 
 #userTable thead tr {
-    background-color: #009879;
-    color: #ffffff;
+    background-color: #063DAA;
+    color: #FFAA00;
     text-align: center;
 }
 
@@ -49,14 +57,14 @@ main {
 }
 
 #userTable tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 2px solid #063DAA;
 }
 
 #userTable tbody tr:hover {
     /*font-weight: bold;*/
-    color: #009879;
+    color: darkblue;
     cursor: pointer;
-    background-color: #BDD2B6;;
+    background-color: lightblue;;
 }
 
 #userTable .user-record {
