@@ -5,6 +5,10 @@ const modal = {
     foot: document.querySelector("#modal > footer"),
     container: document.querySelector("#modal-container") // represents the background
 }
+const customHeaders = new Headers({
+    'Content-Type': 'application/json'
+})
+
 
 // const renderMovies=
 
@@ -20,11 +24,25 @@ fetch("https://dazzling-antique-may.glitch.me/movies")
             res.map(mapUserToRecord).join("");
         $(".delete").on("click", handleDeleteView);
         $(".edit").on("click", handleDisplayUpdate);
+        $("#create").on("click", handleCreateUserView);
     })
 
     .catch((e) => {
         console.log("ERROR!!!!!!", e);
     });
+
+const mapUserToRecord = ({title, director, rating, genre, id}) => {
+    return `<tr data-id="${id}" >
+                       <td data-id="${id}" class="user-record"> ${rating}</td>
+                       <td data-id="${id}" class="user-record">${director}</td>
+                       <td data-id="${id}" class="user-record">${title}</td>
+                       <td data-id="${id}" class="user-record">${genre}</td>
+                       <td>
+                            <button class="delete" value="${id}">X</button>
+                            <button class="edit" value="${id}">Edit</button>
+                       </td>
+                   </tr>`
+};
 //equal whole function and recall after complete to call again with new data
 
 
@@ -82,7 +100,7 @@ const handleDisplayUpdate = (event) => {
     //TODO: Map to update form
     //TODO: Add handlers
 
-    fetch("https://dazzling-antique-may.glitch.me/movies/" + event.target.value, {method: 'PUT'})
+    fetch("https://dazzling-antique-may.glitch.me/movies/" + event.target.value, {method: 'GET'})
         .then(res => res.json())
         .then(res => {
 
@@ -102,16 +120,21 @@ const handleDisplayUpdate = (event) => {
 const handleDoUpdate = (event) => {
     event.preventDefault();
 
-    const movies = document.forms.update;
+
+    const form = document.forms.update;
 
     let data = {
-        id: movies.id.value,
-        title: movies.title.value,
-        director: movies.director.value,
-        genre: movies.genre.value
+        id: form.id.value,
+        title: form.title.value,
+        director: form.director.value,
+        genre: form.genre.value,
+
     }
 
+
+
     let settings = {
+        headers: customHeaders,
         method: "PUT",
         body: JSON.stringify(data)
     }
@@ -136,29 +159,25 @@ const mapButtonsForUpdate = (id, type = 'update') => {
             </form>`
 }
 
-
-//
-//
-const mapUserToRecord = ({title, director, rating, genre, id}) => {
-    return `<tr data-id="${id}" >
-                       <td data-id="${id}" class="user-record"> ${rating}</td>
-                       <td data-id="${id}" class="user-record">${director}</td>
-                       <td data-id="${id}" class="user-record">${title}</td>
-                       <td data-id="${id}" class="user-record">${genre}</td>
-                       <td>
-                            <button class="delete" value="${id}">X</button>
-                            <button class="edit" value="${id}">Edit</button>
-                       </td>
-                   </tr>`
-};
-
-
 const mapUserToUpdate = (data) => {
     return createForm("update", data)
 }
 
+
+
 const mapUserCreateForm = () => {
     return createForm("create")
+}
+const handleCreateUserView = (event) => {
+    // TODO: Create form for users to fill out.
+    // Inputs!
+
+    modal.main.innerHTML = mapUserCreateForm();
+    modal.foot.innerHTML = mapButtonsForUpdate(0,"create")
+
+    $("button.confirm.create").on("click",handleDoCreateUser);
+    enableModal();
+
 }
 
 const createForm = (name, data) => {
@@ -168,11 +187,6 @@ const createForm = (name, data) => {
             title: "",
             director: "",
             genre: ""
-            // gender: "",
-            // email: "",
-            // dateOfBirth: "",
-            // phone: "",
-            // picture: ""
         }
     }
 
@@ -191,15 +205,13 @@ const createForm = (name, data) => {
     </form>
     `
 }
-
-
 const mapUserToView =
-    ({id, title, director, genre}) => {
+    ({id, title, firstName, lastName, gender, email, dateOfBirth, phone, picture, location}) => {
 
         // handle Z in data for timezone, might need to add back for update
-        // dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
+        dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length-1);
 
-        console.log("title", title)
+        console.log("location:", location)
         return `
        <div class="profile">
                 <section class="header">
@@ -221,8 +233,44 @@ const mapUserToView =
                     <div>Title:  <span>${title}</span></div>
                 </section>
        </div>
-`
+    `
     }
+
+const handleDoCreateUser = (event) => {
+    // TODO: Create a new User!
+    event.preventDefault();
+
+    const form = document.forms.create;
+
+    let data = {
+        id: form.id.value,
+        title: form.title.value,
+        director: form.director.value,
+        genre: form.genre.value,
+
+    }
+
+    // Data request to create a new one
+    let settings = {
+        headers: customHeaders,
+        method: "POST",
+        body: JSON.stringify(data)
+    }
+
+
+    fetch("https://dazzling-antique-may.glitch.me/movies/", settings)
+        .then(res => res.json())
+        .then(res => {
+            console.log("res:", res)
+        })
+
+}
+
+
+
+
+
+
 
 //
 //
